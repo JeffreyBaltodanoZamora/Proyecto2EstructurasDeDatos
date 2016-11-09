@@ -26,9 +26,20 @@ public:
 	void manejarEntrada();
 	bool nivelCompleto();
 	int subMenuNivel();
+	void Q();
+	void W();
+	void E();
+	void A();
+	void S();
+	void D();
+	void Z();
+	void X();
+	void C();
 private:
-
-	
+	int q,w,e,a,s,d,z,x,c;
+	bool turnoPJ1 = true;
+	string mapa[3][3];
+	sf::Sprite sprite;
 	Window m_window;
 	sf::Font font;
 	sf::Text menu;
