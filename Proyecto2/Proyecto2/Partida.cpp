@@ -14,17 +14,16 @@ Partida::~Partida()
 }
 
 void Partida::nuevaPartidaJvJ() {
-	
 	while (!m_window.haTerminado()) {
 		m_window.actualizar();
 		m_window.limpiar();
 		agregaTexturasEscenario(m_window);
 		manejarEntrada();
 		m_window.desplegar();
-		/*if (nivelCompleto()) {
+		if (!nivelCompleto()) {
 			m_window.limpiar();
 			subMenuNivel();
-		}*/
+		}
 	}
 }
 
@@ -35,29 +34,20 @@ int Partida::subMenuNivel() {
 	menu.setFont(font);
 	menu.setColor(sf::Color::Blue);
 
-	menu.setString("Facil (a)");
+	menu.setString("Jugar otra vez (space)");
 	menu.setPosition(sf::Vector2f(540 / 2, 480 / (MAX_NUMBER_OF_ITEMS + 1) * 1));
-	m_window.dibujar(menu);
-
-	menu.setString("Normal (s)");
-	menu.setPosition(sf::Vector2f(540 / 2, 480 / (MAX_NUMBER_OF_ITEMS + 1) * 2));
-	m_window.dibujar(menu);
-
-	menu.setString("Dificil (d)");
-	menu.setCharacterSize(a);
-	menu.setPosition(sf::Vector2f(540 / 2, 480 / (MAX_NUMBER_OF_ITEMS + 1) * 3));
 	m_window.dibujar(menu);
 
 	m_window.desplegar();
 	while (!eleccion) {
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+			for (int i = 0; i < 3; i++) {
+				for (int j = 0; j < 3; j++) {
+					mapa[i][j] = "";
+				}
+			}
 			eleccion = true;
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-			eleccion = true;
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-			eleccion = true;
+			q = 0; w = 0; e = 0; a = 0; s = 0; d = 0; z = 0; x = 0; c = 0;
 		}
 	}
 	return 0;
@@ -210,12 +200,95 @@ void Partida::manejarEntrada() {
 	}
 }
 
-bool Partida::nivelCompleto() {
-	if (true) 
+bool Partida::nivelCompleto()
+{
+	if (mapa[0][0] == "X" && mapa[0][1] == "X" && mapa[0][2] == "X")
 	{
-		return true;
+		cout << "EL jugador 1 gana" << endl;
+		return false;
 	}
-	return false;
+	else if (mapa[1][0] == "X" && mapa[1][1] == "X" && mapa[1][2] == "X")
+	{
+		cout << "EL jugador 1 gana" << endl;
+		return false;
+	}
+	else if (mapa[2][0] == "X" && mapa[2][1] == "X" && mapa[2][2] == "X")
+	{
+		cout << "EL jugador 1 gana" << endl;
+		return false;
+	}
+	//columnas
+	else if (mapa[0][0] == "X" && mapa[1][0] == "X" && mapa[2][0] == "X")
+	{
+		cout << "EL jugador 1 gana" << endl;
+		return false;
+	}
+	else if (mapa[0][1] == "X" && mapa[1][1] == "X" && mapa[2][1] == "X")
+	{
+		cout << "EL jugador 1 gana" << endl;
+		return false;
+	}
+	else if (mapa[0][2] == "X" && mapa[1][2] == "X" && mapa[2][2] == "X")
+	{
+		cout << "EL jugador 1 gana" << endl;
+		return false;
+	}
+	//vertical
+	else if (mapa[0][0] == "X" && mapa[1][1] == "X" && mapa[2][2] == "X")
+	{
+		cout << "EL jugador 1 gana" << endl;
+		return false;
+	}
+	else if (mapa[0][2] == "X" && mapa[1][1] == "X" && mapa[2][0] == "X")
+	{
+		cout << "EL jugador 1 gana" << endl;
+		return false;
+	}
+	//segundo
+	if (mapa[0][0] == "O" && mapa[0][1] == "O" && mapa[0][2] == "O")
+	{
+		cout << "EL jugador 2 gana" << endl;
+		return false;
+	}
+	else if (mapa[1][0] == "O" && mapa[1][1] == "O" && mapa[1][2] == "O")
+	{
+		cout << "EL jugador 2 gana" << endl;
+		return false;
+	}
+	else if (mapa[2][0] == "O" && mapa[2][1] == "O" && mapa[2][2] == "O")
+	{
+		cout << "EL jugador 2 gana" << endl;
+		return false;
+	}
+	//columnas
+	else if (mapa[0][0] == "O" && mapa[1][0] == "O" && mapa[2][0] == "O")
+	{
+		cout << "EL jugador 2 gana" << endl;
+		return false;
+	}
+	else if (mapa[0][1] == "O" && mapa[1][1] == "O" && mapa[2][1] == "O")
+	{
+		cout << "EL jugador 2 gana" << endl;
+		return false;
+	}
+	else if (mapa[0][2] == "O" && mapa[1][2] == "O" && mapa[2][2] == "O")
+	{
+		cout << "EL jugador 2 gana" << endl;
+		return false;
+	}
+	//vertical
+	else if (mapa[0][0] == "O" && mapa[1][1] == "O" && mapa[2][2] == "O")
+	{
+		cout << "EL jugador 2 gana" << endl;
+		return false;
+	}
+	else if (mapa[0][2] == "O" && mapa[1][1] == "O" && mapa[2][0] == "O")
+	{
+		cout << "EL jugador 2 gana" << endl;
+		return false;
+	}
+	else
+		return true;
 }
 
 void Partida::Q() {
